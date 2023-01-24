@@ -8,58 +8,37 @@ output:
 
 ## Loading and preprocessing the data
 
-
-```r
+```{r}
 data <- read.csv("activity.csv")
 
 #removing NA records
 data_no_missing <- na.omit(data)
+
 ```
 
 ## What is mean total number of steps taken per day?
 
 
-
-```r
+```{r}
 daily_step_counts <- setNames(aggregate(data_no_missing$steps, list(data_no_missing$date), FUN=sum), c("date", "total_steps"))
 
 hist(daily_step_counts$total_steps, xlab="Total number of steps",breaks=20, main="Total number of daily steps")
-```
 
-![](PA1_template_files/figure-html/unnamed-chunk-2-1.png)<!-- -->
-
-```r
 mean_daily_steps <- mean(daily_step_counts$total_steps)
 median_daily_steps <- median(daily_step_counts$total_steps)
 
 sprintf("The mean total number of steps is: %f",mean_daily_steps)
-```
-
-```
-## [1] "The mean total number of steps is: 10766.188679"
-```
-
-```r
 sprintf("The median total number of steps is: %i",median_daily_steps)
-```
-
-```
-## [1] "The median total number of steps is: 10765"
 ```
 
 
 ## What is the average daily activity pattern?
 
-
-```r
+```{r}
 average_interval_steps <- setNames(aggregate(data_no_missing$steps, list(data_no_missing$interval), FUN=,mean), c("interval", "mean_steps"))
 
 plot(x=average_interval_steps$interval, y=average_interval_steps$mean_steps, type="l", xlab="5 minute interval", ylab="Average steps", main="Average daily steps across 5 minute intervals")
-```
 
-![](PA1_template_files/figure-html/unnamed-chunk-3-1.png)<!-- -->
-
-```r
 #Sorting by mean steps decreasing to find the max mean steps
 sortedData <- average_interval_steps[order(average_interval_steps$mean_steps, decreasing=TRUE),]
 
@@ -69,22 +48,17 @@ highest_average <- sortedData[1,1]
 sprintf("The highest average interval was: %i",highest_average)
 ```
 
-```
-## [1] "The highest average interval was: 835"
-```
-
 
 ## Imputing missing values
 
+```{r}
 
-```r
 count_of_missing  <- sum(is.na(data$steps))
 
 sprintf("The number of missing steps is: %i",count_of_missing)
-```
 
-```
-## [1] "The number of missing steps is: 2304"
+
+
 ```
 
 
