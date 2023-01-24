@@ -8,16 +8,20 @@ output:
 
 ## Loading and preprocessing the data
 
-```{r}
+
+```r
 data <- read.csv("activity.csv")
 ```
 
 ## What is mean total number of steps taken per day?
 
 
-```{r}
+
+```r
 hist(x=data$steps) 
 ```
+
+![](PA1_template_files/figure-html/unnamed-chunk-2-1.png)<!-- -->
 
 ## What is the average daily activity pattern?
 
